@@ -1,4 +1,4 @@
-# CSYE7200_FinalProject
+# CSYE7200_FinalProject_Team06
 Repo for CSYE7200 Big-Data Sys Engr Using Scala Final Project
 
 Project: 
