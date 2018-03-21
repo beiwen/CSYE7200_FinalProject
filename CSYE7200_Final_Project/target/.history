@@ -1,0 +1,13 @@
+version
+run
+runMain
+runMain s3:/csye7200.bucket.forfinal/aggregate/agg_match_stats_4.csv
+runMain
+run
+run s3:/csye7200.bucket.forfinal/aggregate/agg_match_stats_4.csv
+run 's3:/csye7200.bucket.forfinal/aggregate/agg_match_stats_4.csv'
+run
+--version
+version
+spark version
+spark.version

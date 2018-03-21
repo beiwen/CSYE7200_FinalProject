@@ -1,0 +1,6 @@
+*.class
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
