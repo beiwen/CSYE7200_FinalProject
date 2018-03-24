@@ -1,5 +1,4 @@
-package edu.neu.coe.CSYE7200_Team6_2018Spring
-
+package edu.neu.coe.CSYE7200_Team6_2018Spring.Ingest
 
 import java.io.File
 
@@ -37,7 +36,7 @@ object PreliminaryProcess extends App {
 
     lazy val src = spark.read.format("csv")
       .option("header", "true")
-      .option("inferSchema", "false")
+      .option("inferSchema", "true")
       .load(path)
 
     def showCol(): StructType = {
