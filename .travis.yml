@@ -4,4 +4,7 @@ scala:
 jdk:
   - oraclejdk8
 
-script: sbt ++$TRAVIS_SCALA_VERSION check-gen-type-classes test
+script:
+ - pwd
+ - cd CSYE7200_Final_Project
+sbt ++$TRAVIS_SCALA_VERSION check-gen-type-classes test
