@@ -11,3 +11,5 @@ run
 version
 spark version
 spark.version
+updateSbtClassifiers
+run

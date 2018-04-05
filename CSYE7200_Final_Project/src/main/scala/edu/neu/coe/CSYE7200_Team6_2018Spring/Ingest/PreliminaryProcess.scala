@@ -45,7 +45,7 @@ object PreliminaryProcess extends App {
       return schema
     }
 
-    def sampling(rows: Int, schema: StructType):Unit = {
+    def sampling(rows: Int):Unit = {
 
       val file = "temp"
       val desFile = "sample.csv"
@@ -66,6 +66,6 @@ object PreliminaryProcess extends App {
     }
 
     val s = showCol()
-    sampling(10000, s)
+    sampling(10000)
   }
 }

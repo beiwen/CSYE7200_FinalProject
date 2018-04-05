@@ -3,6 +3,8 @@ package edu.neu.coe.CSYE7200_Team6_2018Spring.Ingest
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{Dataset, SparkSession}
 
+import scala.util.Try
+
 object Ingest {
 
   val schema: StructType = new StructType(Array(StructField("date", StringType, true),
@@ -46,9 +48,12 @@ object Ingest {
     }
 
 
-
     val ds = ingest(spark, "sample.csv", schema)
     ds.show()
   }
 
+}
+
+trait Ingestible[X] {
+  def fromString(w: String): Try[X]
 }
