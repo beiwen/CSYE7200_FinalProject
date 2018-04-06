@@ -3,6 +3,8 @@ package edu.neu.coe.CSYE7200_Team6_2018Spring.Ingest
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{Dataset, SparkSession}
 
+import scala.util.Try
+
 
 object Ingest {
 
@@ -26,14 +28,18 @@ object Ingest {
   def ingest(spark: SparkSession, srcDir: String, schema: StructType): Dataset[Player]  = {
 
     import spark.implicits._
+//    implicit def tryPlayer: org.apache.spark.sql.Encoder[Try[Player]] = org.apache.spark.sql.catalyst.encoders.ExpressionEncoder()
 
-    spark.read
+  spark.read
       .option("header", "true")
       .option("inferSchema", "false")
       .schema(schema)
       .format("csv")
       .load(srcDir)
       .as[Player]
+
+//    for(p <- ds) yield Try(p)
+
   }
 
   def main(args: Array[String]): Unit = {
