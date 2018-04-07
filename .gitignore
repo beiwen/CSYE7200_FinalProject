@@ -4,4 +4,5 @@
 *.ipr
 *.iws
 .idea
-*/target/*
+CSYE7200_Final_Project/target
+CSYE7200_Final_Project/project/target
