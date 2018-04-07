@@ -1,0 +1,8 @@
+*.class
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
+CSYE7200_Final_Project/target
+CSYE7200_Final_Project/project/target

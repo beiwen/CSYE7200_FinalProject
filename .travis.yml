@@ -1,0 +1,14 @@
+language: scala
+scala:
+  - 2.11.12
+jdk:
+  - oraclejdk8
+
+script:
+ - pwd
+ - cd CSYE7200_Final_Project
+ - sbt ++$TRAVIS_SCALA_VERSION test
+notifications:
+  email:
+    - zhu.zheny@husky.neu.edu
+    - guo.bei@husky.neu.edu
