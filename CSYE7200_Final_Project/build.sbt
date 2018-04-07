@@ -10,6 +10,7 @@ libraryDependencies ++= {
   Seq(
     "org.apache.spark" %% "spark-core" % sparkVer,
     "org.apache.spark" %% "spark-sql" % sparkVer,
+    "org.apache.spark" %% "spark-mllib" % sparkVer,
     "org.scalatest" %% "scalatest" % "3.0.1" % "test"
   )
 }
