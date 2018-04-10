@@ -16,7 +16,7 @@ case class Player (game_size: Int, match_id: String, match_mode: String, party_s
 
 object Player extends App{
 
-  val schema: StructType = new StructType(Array(StructField("date", StringType, true),
+  lazy val schema: StructType = new StructType(Array(StructField("date", StringType, true),
     StructField("game_size", IntegerType, true),
     StructField("match_id",StringType, true),
     StructField("match_mode", StringType, true),
@@ -34,7 +34,7 @@ object Player extends App{
   )
 
 
-  implicit val spark = {
+  lazy implicit val spark = {
     println("initial spark")
     SparkSession
       .builder()
