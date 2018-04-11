@@ -27,7 +27,7 @@ object Clustering {
       }
     }
 
-    val k = determinK()
+//    val k = determinK()
 
     val kmeans = new KMeans().setK(k).setSeed(1L)
     val fitDf = createDfWithFeature(ds)
