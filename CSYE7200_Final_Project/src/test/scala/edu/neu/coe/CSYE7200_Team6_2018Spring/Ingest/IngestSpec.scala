@@ -8,6 +8,7 @@ import org.scalatest.{FlatSpec, Matchers}
 class IngestSpec extends FlatSpec with Matchers {
 
   behavior of "Ingest"
+
   it should "work for Int" in {
     val schema: StructType = new StructType(Array(StructField("number", IntegerType, true)))
     val path = "testForInt.csv"
@@ -18,7 +19,6 @@ class IngestSpec extends FlatSpec with Matchers {
         .master("local[*]")
         .getOrCreate()
     }
-
     trait IngestInt extends Ingest {
       import spark.implicits._
       def ingest(srcDir: String, schema: StructType)(implicit spark:SparkSession): Dataset[Int] = {
@@ -39,5 +39,4 @@ class IngestSpec extends FlatSpec with Matchers {
     total shouldBe 516
     spark.stop()
   }
-
 }
