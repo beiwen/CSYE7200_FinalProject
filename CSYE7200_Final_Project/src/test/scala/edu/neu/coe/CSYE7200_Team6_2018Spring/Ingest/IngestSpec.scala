@@ -37,6 +37,5 @@ class IngestSpec extends FlatSpec with Matchers {
     ids.distinct().count() shouldBe 10
     val total = ids.collect().foldLeft(0)(_ + _)
     total shouldBe 516
-    spark.stop()
   }
 }
