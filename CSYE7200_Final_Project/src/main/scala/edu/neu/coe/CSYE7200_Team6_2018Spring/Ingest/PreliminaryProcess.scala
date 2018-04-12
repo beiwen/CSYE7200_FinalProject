@@ -16,8 +16,8 @@ import org.apache.spark.sql.types.StructType
 class PreliminaryProcess {
   //used to read data from a specific path(s3 bucket) into DataFrame,
   //because need to infer schema, so it is relatively slow
-  String ACCESSKEYID
-  String SECRETKEY
+  val ACCESSKEYID = ""
+  val SECRETKEY =""
   def readSrc(format : String, path : String) = {
     implicit val spark = {
       println("initial spark")
