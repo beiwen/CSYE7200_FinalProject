@@ -19,6 +19,7 @@ object Classification {
           .setLabelCol("survived")
           .setMaxIter(100)
           .setSeed(1234L)
+
       val model = trainer.fit(trian)
       val result = model.transform(test)
       val predictionLabels = result.select("prediction", "survived")
