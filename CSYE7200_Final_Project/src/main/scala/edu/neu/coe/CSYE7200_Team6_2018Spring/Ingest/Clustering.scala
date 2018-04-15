@@ -15,7 +15,7 @@ object Clustering {
       val scaler = new StandardScaler().setInputCol("unscaled_features").setOutputCol("features")
       val scalerModel = scaler.fit(assembledDf)
       val scaledDf = scalerModel.transform(assembledDf)
-      return scaledDf
+      scaledDf
     }
 
     def clusteringHelper(dsSeprated: Dataset[Player]): KMeansModel = {
@@ -32,7 +32,7 @@ object Clustering {
       val fitDf = createDfWithFeature(dsSeprated)
       fitDf.cache()
       val model = kmeans.fit(fitDf)
-      return model
+      model
     }
 
     val soloPlayers = ds.filter(d => d.party_size == 1).cache()
@@ -40,14 +40,14 @@ object Clustering {
     val squadPlayers = ds.filter(d => d.party_size == 4).cache()
 
     val models = Array(soloPlayers, duoPlayers, squadPlayers).map(pd => clusteringHelper(pd))
-    return models
+    models
   }
 
   def clusteringByBattle(ds: Dataset[Player]): Array[KMeansModel] = ???
 
-  def filtPlayers(ds: Dataset[Player]): Dataset[Player] = {
-    val filtedPlayers = ds.filter(d => (d.player_dist_ride != 0 || d.player_dist_walk != 0) && d.player_survive_time <= 2400)
-    return filtedPlayers
+  def filterPlayers(ds: Dataset[Player]): Dataset[Player] = {
+    val filterdPlayers = ds.filter(d => (d.player_dist_ride != 0 || d.player_dist_walk != 0) && d.player_survive_time <= 2400)
+    filterdPlayers
   }
 
   def determinK(assembledDf: DataFrame): IndexedSeq[(Int, Double)] = {
@@ -56,7 +56,8 @@ object Clustering {
     def wssseList(asdf: DataFrame) = {
       clusters zip clusters.map(k => new KMeans().setK(k).setSeed(1L).fit(asdf).computeCost(asdf))
     }
-    return wssseList(assembledDf)
+    //Following return value is used to draw plot to find elbow point
+    wssseList(assembledDf)
   }
 
 }
