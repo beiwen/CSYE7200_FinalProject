@@ -43,11 +43,12 @@ object Clustering {
     models
   }
 
-  def clusteringByBattle(ds: Dataset[Player]): Array[KMeansModel] = ???
+  def clusteringByBattle(ds: Dataset[Player]): Array[KMeansModel] = {
+
+  }
 
   def filterPlayers(ds: Dataset[Player]): Dataset[Player] = {
-    val filterdPlayers = ds.filter(d => (d.player_dist_ride != 0 || d.player_dist_walk != 0) && d.player_survive_time <= 2400)
-    filterdPlayers
+   ds.filter(d => (d.player_dist_ride != 0 || d.player_dist_walk != 0) && d.player_survive_time <= 2400)
   }
 
   def determinK(assembledDf: DataFrame): IndexedSeq[(Int, Double)] = {

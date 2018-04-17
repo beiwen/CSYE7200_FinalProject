@@ -1,8 +1,8 @@
 package edu.neu.coe.CSYE7200_Team6_2018Spring.Ingest
+
 import org.apache.spark.sql.{Dataset, SparkSession}
 import org.apache.spark.sql.types._
 
-import scala.util.Try
 
 /**
   *  Created by team6 on 2018/3/19
