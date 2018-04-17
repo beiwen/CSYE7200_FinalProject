@@ -57,6 +57,9 @@ object Player extends App{
         .load(srcDir)
         .as[Player]
     }
+    def filterPlayers(ds: Dataset[Player]): Dataset[Player] = {
+      ds.filter(d => (d.player_dist_ride != 0 || d.player_dist_walk != 0) && d.player_survive_time <= 2400)
+    }
   }
 
   object IngestPlayer extends IngestPlayer
