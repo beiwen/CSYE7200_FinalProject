@@ -41,7 +41,7 @@ class PreliminaryProcess {
   def showCol(src : DataFrame): StructType = {
     val schema = src.schema
     println(schema)
-    return schema
+    schema
   }
   //used to merge files from an HDFS directory over to an HDFS file
   def merge(srcPath: String, dstPath: String): Unit =  {

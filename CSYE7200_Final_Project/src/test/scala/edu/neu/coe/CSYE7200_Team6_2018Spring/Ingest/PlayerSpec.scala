@@ -28,4 +28,12 @@ class PlayerSpec extends FlatSpec with Matchers {
   it should "work for the number of Player" in {
     dataset.count() shouldBe 10000
   }
+
+  behavior of "filter"
+  it should "work for filtering unusual players" in{
+    val filteredPL = IngestPlayer.filterPlayers(dataset)
+    filteredPL.count() shouldBe 9779
+  }
 }
+
+
