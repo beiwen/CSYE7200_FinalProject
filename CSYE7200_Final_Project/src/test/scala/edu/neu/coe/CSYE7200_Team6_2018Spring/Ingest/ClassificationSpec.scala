@@ -17,7 +17,6 @@ class ClassificationSpec extends FlatSpec with Matchers{
     val nnModels = Classification.buildingNNModels(dataset.limit(10))
     nnModels.size shouldBe 3
     val arr1 = nnModels.map(m => m.getClass.toString.equals("class org.apache.spark.ml.classification.MultilayerPerceptronClassificationModel"))
-//    nnModels(0).getClass shouldBe MultilayerPerceptronClassificationModel.getClass()
     arr1 shouldBe Array(true, true, true)
   }
 
