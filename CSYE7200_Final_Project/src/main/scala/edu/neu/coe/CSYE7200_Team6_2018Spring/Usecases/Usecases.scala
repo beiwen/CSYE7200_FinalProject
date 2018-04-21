@@ -10,7 +10,7 @@ import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 import org.apache.spark.sql.types.StructType
 
 
-object Usecases {
+object Usecases extends App {
 
   /**
     * models object is used to fetch the different trained models saved in AWS S3 bucket.
