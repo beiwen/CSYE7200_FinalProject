@@ -35,7 +35,7 @@ object Usecases {
     */
   val schema: StructType = Player.schema
   implicit val spark: SparkSession = Player.spark
-  val path = _
+  val path = "s3a://csye7200.bucket.forfinal/testData/*"
   val dataset: Dataset[Player] = IngestPlayer.ingest(path, schema)
 
 
@@ -62,7 +62,6 @@ object Usecases {
   val duo_predicted_by_battle = models.clusteringByBattleForDuo.transform(duoDF_clustering_battle)
   val squad_predicted_by_battle = models.clusteringByBattleForSquad.transform(squadDF_clustering_battle)
   Array(solo_predicted_by_battle, duo_predicted_by_battle, squad_predicted_by_battle)
-
 
 
   /** Clustering2 --- Clustering by Distance
