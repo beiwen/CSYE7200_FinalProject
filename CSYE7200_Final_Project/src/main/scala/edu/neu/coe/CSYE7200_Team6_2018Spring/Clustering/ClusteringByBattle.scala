@@ -34,7 +34,6 @@ object ClusteringByBattle extends Clustering{
         kmeans.fit(fitDf)
       }
     }
-
   }
 
   override def dropCols(df: DataFrame): DataFrame = {
@@ -50,7 +49,7 @@ object ClusteringByBattle extends Clustering{
     val schema = Player.schema
     implicit val spark = Player.spark
     val dataset = IngestPlayer.ingest("sample.csv", schema)
-    ClusteringByDistance.clustering(dataset)
+    ClusteringByBattle.clustering(dataset)
   }
 
 }

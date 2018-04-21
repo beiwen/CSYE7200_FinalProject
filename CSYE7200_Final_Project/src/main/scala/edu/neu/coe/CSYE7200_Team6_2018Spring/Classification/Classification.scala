@@ -34,8 +34,8 @@ object Classification {
     val duoPlayers = ds.filter(d => d.party_size == 2).cache()
     val squadPlayers = ds.filter(d => d.party_size == 4).cache()
 
-    val models = Array(soloPlayers, duoPlayers, squadPlayers).map(pd => buildModelHelper(pd))
-    models
+    Array(soloPlayers, duoPlayers, squadPlayers).map(pd => buildModelHelper(pd))
+
   }
 
   def buildingRFModels(ds: Dataset[Player]): Array[RandomForestClassificationModel] = {
