@@ -34,9 +34,7 @@ object ClusteringByDistance extends Clustering {
     val schema = Player.schema
     implicit val spark = Player.spark
     val dataset = IngestPlayer.ingest("sample.csv", schema)
-    val models = ClusteringByDistance.clustering(dataset)
-    println("Cluster Centers: ")
-    for(model <- models) yield model.clusterCenters.foreach(println)
+    ClusteringByDistance.clustering(dataset)
   }
 }
 
