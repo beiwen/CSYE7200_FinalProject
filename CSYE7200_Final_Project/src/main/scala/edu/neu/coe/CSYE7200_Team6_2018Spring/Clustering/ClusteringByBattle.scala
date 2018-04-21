@@ -24,12 +24,12 @@ object ClusteringByBattle extends Clustering{
 
     dsSeprated.head.party_size match {
       case 1 => {
-        val fitDf = createDfWithFeature(dsSeprated,inputCols1)
+        val fitDf = createDfWithFeature(dsSeprated, inputCols1)
         fitDf.cache()
         kmeans.fit(fitDf)
       }
       case _ => {
-        val fitDf = createDfWithFeature(dsSeprated,inputCols2)
+        val fitDf = createDfWithFeature(dsSeprated, inputCols2)
         fitDf.cache()
         kmeans.fit(fitDf)
       }
