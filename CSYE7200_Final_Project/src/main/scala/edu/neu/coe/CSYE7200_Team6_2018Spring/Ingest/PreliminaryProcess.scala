@@ -16,6 +16,8 @@ import org.apache.spark.sql.types.StructType
 class PreliminaryProcess {
   //used to read data from a specific path(s3 bucket) into DataFrame,
   //because need to infer schema, so it is relatively slow
+  val ACCESSKEYID = ""
+  val SECRETKEY =""
   def readSrc(format : String, path : String) = {
     implicit val spark = {
       println("initial spark")
@@ -27,8 +29,8 @@ class PreliminaryProcess {
     }
     //Setting up required configuration for spark to talk with AWS S3 bucket. The following way to provided AWS credential is not recommended.
     //Following code are provided just for users who have no experience with AWS S3.
-    spark.conf.set("fs.s3n.awsAccessKeyId","AKIAJYRJRH6MYNFWM5CA")
-    spark.conf.set("fs.s3n.awsSecretAccessKey", "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")
+    spark.conf.set("fs.s3n.awsAccessKeyId", ACCESSKEYID)
+    spark.conf.set("fs.s3n.awsSecretAccessKey", SECRETKEY)
     spark.read.format(format)
       .option("header", "true")
       .option("inferSchema", "true")
