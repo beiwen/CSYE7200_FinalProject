@@ -20,8 +20,6 @@ class ClusteringByDistanceSpec extends FlatSpec with Matchers {
     soloModel.clusterCenters should have length 6
     val soloDF = ClusteringByDistance.createDfWithFeature(soloPlayers,inputCols)
     val soloClustered = soloModel.transform(soloDF)
-    soloClustered.createOrReplaceTempView("soloDist")
-    soloClustered.map(_.getAs())
     assert(soloClustered.columns.length === 6)
     soloClustered.columns contains ("prediction")
   }
