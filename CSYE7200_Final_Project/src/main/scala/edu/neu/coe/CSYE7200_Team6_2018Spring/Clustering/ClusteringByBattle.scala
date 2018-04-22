@@ -21,23 +21,26 @@ object ClusteringByBattle extends Clustering{
       case _ => 0
     }
     val kmeans = new KMeans().setK(k).setSeed(1L)
-    if(dsSeprated.head.party_size == 1) {
-      val fitDf = createDfWithFeature(dsSeprated,inputCols1)
-      fitDf.cache()
-      kmeans.fit(fitDf)
-    }else {
-      val fitDf = createDfWithFeature(dsSeprated,inputCols2)
-      fitDf.cache()
-      kmeans.fit(fitDf)
+
+    dsSeprated.head.party_size match {
+      case 1 => {
+        val fitDf = createDfWithFeature(dsSeprated, inputCols1)
+        fitDf.cache()
+        kmeans.fit(fitDf)
+      }
+      case _ => {
+        val fitDf = createDfWithFeature(dsSeprated, inputCols2)
+        fitDf.cache()
+        kmeans.fit(fitDf)
+      }
     }
   }
 
   override def dropCols(df: DataFrame): DataFrame = {
     val party_size = df.select("party_size").take(1).map(_(0)).toList.head
-    if(party_size == 1) {
-      df.drop("date","game_size","match_id","match_mode","party_size","player_assists","player_dbno","player_dist_ride","player_dist_walk","player_name","player_survive_time","team_id")
-    } else{
-      df.drop("date","game_size","match_id","match_mode","party_size","player_dist_ride","player_dist_walk","player_name","player_survive_time","team_id")
+    party_size match {
+        case 1 => df.drop("date","game_size","match_id","match_mode","party_size","player_assists","player_dbno","player_dist_ride","player_dist_walk","player_name","player_survive_time","team_id")
+        case _ => df.drop("date","game_size","match_id","match_mode","party_size","player_dist_ride","player_dist_walk","player_name","player_survive_time","team_id")
     }
   }
 
@@ -46,7 +49,7 @@ object ClusteringByBattle extends Clustering{
     val schema = Player.schema
     implicit val spark = Player.spark
     val dataset = IngestPlayer.ingest("sample.csv", schema)
-    ClusteringByDistance.clustering(dataset)
+    ClusteringByBattle.clustering(dataset)
   }
 
 }

@@ -1,10 +1,11 @@
-package edu.neu.coe.CSYE7200_Team6_2018Spring.Ingest
+package edu.neu.coe.CSYE7200_Team6_2018Spring.Classification
 
+import edu.neu.coe.CSYE7200_Team6_2018Spring.Ingest.Player
 import org.apache.spark.ml.classification._
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.feature.{Normalizer, VectorAssembler}
-import org.apache.spark.sql.{DataFrame, Dataset}
 import org.apache.spark.sql.functions.udf
+import org.apache.spark.sql.{DataFrame, Dataset}
 
 object Classification {
   def buildingNNModels(ds: Dataset[Player]): Array[MultilayerPerceptronClassificationModel] = {
@@ -33,8 +34,8 @@ object Classification {
     val duoPlayers = ds.filter(d => d.party_size == 2).cache()
     val squadPlayers = ds.filter(d => d.party_size == 4).cache()
 
-    val models = Array(soloPlayers, duoPlayers, squadPlayers).map(pd => buildModelHelper(pd))
-    models
+    Array(soloPlayers, duoPlayers, squadPlayers).map(pd => buildModelHelper(pd))
+
   }
 
   def buildingRFModels(ds: Dataset[Player]): Array[RandomForestClassificationModel] = {
@@ -64,7 +65,7 @@ object Classification {
     val models = Array(soloPlayers, duoPlayers, squadPlayers).map(pd => buildModelHelper(pd))
     models
   }
-
+  // We also tried LR Models, unfortunately, we did not find a appropriate parameter set.
   def buildingLRModels(ds: Dataset[Player]): Array[LogisticRegressionModel] = {
     def buildModelHelper(ds: Dataset[Player]): LogisticRegressionModel = {
       val dataFrame = createDfWithFeature(ds).cache()
@@ -105,7 +106,7 @@ object Classification {
     resultDf
   }
 
-  def filtPlayers(ds: Dataset[Player]): Dataset[Player] = {
+  def filterPlayers(ds: Dataset[Player]): Dataset[Player] = {
     //We need to filter abnormal data. Some players have "0" as team_placement, which do not affect clustering but obviously affect classification.
     val filterdPlayers = ds.filter(d => (d.player_dist_ride != 0 || d.player_dist_walk != 0)
       && d.player_survive_time <= 2400

@@ -21,7 +21,7 @@ class PlayerSpec extends FlatSpec with Matchers {
 
   it should "work for Player object" in {
     dataset.first() should matchPattern {
-      case Player(95, "2U4GBNA0YmmhivBOFUiipklIPVdC0DRgkX88eyhTYGiAnoXrjvEhNQHZMWi8d5y9", "tpp", 1, 0, 0, 0.0, 37.919838, 20, 0, "m3xdave", 106.351, 100000, 88) =>
+      case Player("2017-10-31T02:41:53+0000", 95, "2U4GBNA0YmmhivBOFUiipklIPVdC0DRgkX88eyhTYGiAnoXrjvEhNQHZMWi8d5y9", "tpp", 1, 0, 0, 0.0, 37.919838, 20, 0, "m3xdave", 106.351, 100000, 88) =>
     }
   }
 
