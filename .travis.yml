@@ -8,11 +8,6 @@ script:
  - pwd
  - cd CSYE7200_Final_Project
  - sbt ++$TRAVIS_SCALA_VERSION test
- - sbt clean coverage test
- - sbt coverageReport
- - sbt coverageAggregate
- - export CODACY_PROJECT_TOKEN=$Project_Token
- - sbt codacyCoverage
  
 notifications:
   email:
