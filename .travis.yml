@@ -8,11 +8,7 @@ script:
  - pwd
  - cd CSYE7200_Final_Project
  - sbt ++$TRAVIS_SCALA_VERSION test
- - sbt clean coverage test coverageReport
  
-after_success:
-  - bash <(curl -s https://codecov.io/bash) -t $token
-  
 notifications:
   email:
     - zhu.zheny@husky.neu.edu
