@@ -22,7 +22,7 @@ object ClusteringByBattle extends Clustering{
     }
     val kmeans = new KMeans().setK(k).setSeed(1L)
 
-    dsSeprated.head.party_size match {
+    dsSeprated.first().party_size match {
       case 1 => {
         val fitDf = createDfWithFeature(dsSeprated, inputCols1)
         fitDf.cache()
@@ -37,8 +37,8 @@ object ClusteringByBattle extends Clustering{
   }
 
   override def dropCols(df: DataFrame): DataFrame = {
-    val party_size = df.select("party_size").take(1).map(_(0)).toList.head
-    party_size match {
+    val partySize = df.select("party_size").take(1).map(_(0)).toList.head
+    partySize match {
         case 1 => df.drop("date","game_size","match_id","match_mode","party_size","player_assists","player_dbno","player_dist_ride","player_dist_walk","player_name","player_survive_time","team_id")
         case _ => df.drop("date","game_size","match_id","match_mode","party_size","player_dist_ride","player_dist_walk","player_name","player_survive_time","team_id")
     }

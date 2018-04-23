@@ -53,15 +53,15 @@ object Usecases extends App {
     */
   val inputCols1 = Array("player_dmg", "player_kills")
   val inputCols2 = Array("player_assists", "player_dbno", "player_dmg", "player_kills")
-  //Get the dateframe with features column
-  val soloDF_clustering_battle = ClusteringByBattle.createDfWithFeature(soloPlayers, inputCols1)
-  val duoDF_clustering_battle = ClusteringByBattle.createDfWithFeature(duoPlayers, inputCols2)
-  val squadDF_clustering_battle = ClusteringByBattle.createDfWithFeature(squadPlayers, inputCols2)
+  //Get the DataFrame with features column
+  val soloDFClusteringBattle = ClusteringByBattle.createDfWithFeature(soloPlayers, inputCols1)
+  val duoDFClusteringBattle = ClusteringByBattle.createDfWithFeature(duoPlayers, inputCols2)
+  val squadDFClusteringBattle = ClusteringByBattle.createDfWithFeature(squadPlayers, inputCols2)
   //Get the prediction result of clustering by battle
-  val solo_predicted_by_battle = models.clusteringByBattleForSolo.transform(soloDF_clustering_battle)
-  val duo_predicted_by_battle = models.clusteringByBattleForDuo.transform(duoDF_clustering_battle)
-  val squad_predicted_by_battle = models.clusteringByBattleForSquad.transform(squadDF_clustering_battle)
-  Array(solo_predicted_by_battle, duo_predicted_by_battle, squad_predicted_by_battle)
+  val soloPredictedByBattle = models.clusteringByBattleForSolo.transform(soloDFClusteringBattle)
+  val duoPredictedByBattle = models.clusteringByBattleForDuo.transform(duoDFClusteringBattle)
+  val squadPredictedByBattle = models.clusteringByBattleForSquad.transform(squadDFClusteringBattle)
+  Array(soloPredictedByBattle, duoPredictedByBattle, squadPredictedByBattle)
 
 
   /** Clustering2 --- Clustering by Distance
@@ -70,31 +70,31 @@ object Usecases extends App {
     */
     val inputCols = Array("player_dist_ride", "player_dist_walk")
     //Get the dateframe with features column
-    val soloDF_clustering_dist = ClusteringByDistance.createDfWithFeature(soloPlayers, inputCols)
-    val duoDF_clustering_dist = ClusteringByDistance.createDfWithFeature(duoPlayers, inputCols)
-    val squadDF_clustering_dist = ClusteringByDistance.createDfWithFeature(squadPlayers, inputCols)
+    val soloDFClusteringDist = ClusteringByDistance.createDfWithFeature(soloPlayers, inputCols)
+    val duoDFClusteringDist = ClusteringByDistance.createDfWithFeature(duoPlayers, inputCols)
+    val squadDFClusteringDist = ClusteringByDistance.createDfWithFeature(squadPlayers, inputCols)
     //Get the prediction result of clustering by distance
-    val solo_predicted_by_dist = models.clusteringByDistForSolo.transform(soloDF_clustering_dist)
-    val duo_predicted_by_dist = models.clusteringByDistForDuo.transform(duoDF_clustering_dist)
-    val squad_predicted_by_dist = models.clusteringByDistForSquad.transform(squadDF_clustering_dist)
-    Array(solo_predicted_by_dist, duo_predicted_by_dist, squad_predicted_by_dist)
+    val soloPredictedByDist = models.clusteringByDistForSolo.transform(soloDFClusteringDist)
+    val duoPredictedByDist = models.clusteringByDistForDuo.transform(duoDFClusteringDist)
+    val squadPredictedByDist = models.clusteringByDistForSquad.transform(squadDFClusteringDist)
+    Array(soloPredictedByDist, duoPredictedByDist, squadPredictedByDist)
 
 
   /** Use case 2 : Classification
     * Before classification, we need to filter the data by removing the unreasonable data and separate them by party_size
     */
     val filteredDSForClassification = Classification.filterPlayers(dataset)
-    val solo_Players = filteredDSForClassification.filter(d => d.party_size == 1).cache()
-    val duo_Players = filteredDSForClassification.filter(d => d.party_size == 2).cache()
-    val squad_Players = filteredDSForClassification.filter(d => d.party_size == 4).cache()
+    val soloMatch = filteredDSForClassification.filter(d => d.party_size == 1).cache()
+    val duoMatch = filteredDSForClassification.filter(d => d.party_size == 2).cache()
+    val squadMatch = filteredDSForClassification.filter(d => d.party_size == 4).cache()
 
-    val soloDF_classification = Classification.createDfWithFeature(solo_Players)
-    val duoDF_classification = Classification.createDfWithFeature(duo_Players)
-    val squadDF_classification = Classification.createDfWithFeature(squad_Players)
+    val soloDFClassification = Classification.createDfWithFeature(soloMatch)
+    val duoDFClassification = Classification.createDfWithFeature(duoMatch)
+    val squadDFClassification = Classification.createDfWithFeature(squadMatch)
 
-    val solo_classification = models.nnModelForSolo.transform(soloDF_classification)
-    val duo_classification = models.nnModelForDuo.transform(duoDF_classification)
-    val squad_classification = models.nnModelForSquad.transform(squadDF_classification)
-    Array(solo_classification, duo_classification, squad_classification)
+    val soloClassification = models.nnModelForSolo.transform(soloDFClassification)
+    val duoClassification = models.nnModelForDuo.transform(duoDFClassification)
+    val squadClassification = models.nnModelForSquad.transform(squadDFClassification)
+    Array(soloClassification, duoClassification, squadClassification)
 
 }

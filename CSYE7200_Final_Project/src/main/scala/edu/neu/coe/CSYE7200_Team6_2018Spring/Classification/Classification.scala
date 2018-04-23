@@ -65,6 +65,7 @@ object Classification {
     val models = Array(soloPlayers, duoPlayers, squadPlayers).map(pd => buildModelHelper(pd))
     models
   }
+
   // We also tried LR Models, unfortunately, we did not find a appropriate parameter set.
   def buildingLRModels(ds: Dataset[Player]): Array[LogisticRegressionModel] = {
     def buildModelHelper(ds: Dataset[Player]): LogisticRegressionModel = {
@@ -100,9 +101,9 @@ object Classification {
     val colArray = Array("player_assists", "player_dbno", "player_dist_ride", "player_dist_walk", "player_dmg", "player_kills", "player_survive_time")
     val vecAss = new VectorAssembler().setInputCols(colArray).setOutputCol("feature_unnormalized")
     val normalizer = new Normalizer().setInputCol("feature_unnormalized").setOutputCol("features")
-    val df_temp_1 = vecAss.transform(ds)
-    val df_temp_2 = normalizer.transform(df_temp_1)
-    val resultDf = df_temp_2.withColumn("survived", isWinnerUdf(df_temp_2("team_placement")))
+    val dfTemp1 = vecAss.transform(ds)
+    val dfTemp2 = normalizer.transform(dfTemp1)
+    val resultDf = dfTemp2.withColumn("survived", isWinnerUdf(dfTemp2("team_placement")))
     resultDf
   }
 
