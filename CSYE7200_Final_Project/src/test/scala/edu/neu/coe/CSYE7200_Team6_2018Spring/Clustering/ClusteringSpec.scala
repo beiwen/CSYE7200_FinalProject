@@ -56,10 +56,10 @@ class ClusteringSpec extends FlatSpec with Matchers {
 
   it should "work for determining K value" in {
     val scaledDf = TestClustering.createDfWithFeature(filteredDS, TestClustering.inputCols)
-    val KPairs = TestClustering.determinK(scaledDf)
-    KPairs should have length 8
-    KPairs shouldBe an [IndexedSeq[_]]
-    for(pair <- KPairs) yield pair shouldBe an [(Int,Double)]
+    val kPairs = TestClustering.determinK(scaledDf)
+    kPairs should have length 8
+    kPairs shouldBe an [IndexedSeq[_]]
+    for(pair <- kPairs) yield pair shouldBe an [(Int,Double)]
   }
 
   it should "work for creating KMeansModel" in{
