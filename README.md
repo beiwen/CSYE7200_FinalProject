@@ -13,3 +13,23 @@ Zhenyu Zhu - zhu.zheny@husky.neu.edu
 
 Beiwen Guo - guo.bei@husky.neu.edu
 
+# How to run
+
+1.Setup Apache Zeppelin.
+
+2.Find _csye7200_Integration_NoteBook.json file in zeppelin_notebook directory and import it into zeppelin.
+（_csye7200_Integration_NoteBook.json includes all use cases we creates.）
+
+3.Follow the instructions in the paragraph of the json file you just opened.
+
+# Methodology and Tools
+
+1.Filtering data: Discard data which will not be used and ingest data into an available format.
+
+2.Spark MLlib: Building and training model using Spark MLlib.
+
+3.AWS: Using AWS resources to process large scale data.
+
+4.Apache Zeppelin: Using Apache Zeppelin to generate visualization output.
+
+5.Hortonworks Data Cloud: With assistance of HDCloud, configure computing resources we need.
